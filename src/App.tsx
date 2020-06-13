@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import CSS from 'csstype';
+import { ToDoList } from './TodoList';
+
+
+type Priority = 1 | 2 | 3 | 4 | 5;
+
+export interface TodoListEntryI {
+  dateAdded: Date,
+  priority: Priority,
+  title: String,
+  description?: String,
+  dueTo?: Date,
+}
+export interface TodoListWithSet{
+  todoList: TodoListEntryI[],
+  setToDoList: React.Dispatch<React.SetStateAction<TodoListEntryI[]>>
+}
 
 function App() {
+  const [todoList, settodoList] = useState([{
+    priority: 1,
+    dateAdded: new Date(),
+    title: ""
+  }, {
+    priority: 5,
+    dateAdded: new Date(),
+    title: "",
+    description: "",
+    dueTo: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
+  }
+  ] as TodoListEntryI[])
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <ToDoList todoList={todoList} setToDoList={settodoList}></ToDoList>
       </header>
     </div>
   );
 }
 
 export default App;
+
