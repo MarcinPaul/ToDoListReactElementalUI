@@ -12,7 +12,7 @@ export interface TodoListEntryI {
   priority: Priority,
   title: String,
   description?: String,
-  dueTo?: Date,
+  dueTo: Date,
 }
 export interface TodoListWithSet {
   todoList: TodoListEntryI[],
@@ -41,11 +41,9 @@ function App() {
       <header className="App-header">
         <Container maxWidth="md">
           <AddToDoForm todoList={todoList} setToDoList={settodoList}>
-
           </AddToDoForm>
           <ToDoList todoList={todoList} setToDoList={settodoList}>
           </ToDoList>
-
         </Container>
       </header>
     </div>
