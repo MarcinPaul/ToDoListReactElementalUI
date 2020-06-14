@@ -65,29 +65,14 @@ export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
     const values = { Title: "", Description: "", Priority: 1, DueTo: new Date() }
     return (
         <form noValidate autoComplete="off" >
-            <Grid container spacing={3} style={{paddingTop:"10px"}}>
-                <Grid item >
-                    <TextField onChange={handleChange("Title")} id="outlined-basic" label="Title" variant="outlined" />
+            <Grid container style={{paddingTop:"10px"}}>
+                <Grid style={{paddingRight:"10px"}}  item  xs={4}>
+                    <TextField onChange={handleChange("Title")} id="outlined-basic" label="Title" variant="outlined" fullWidth />
                 </Grid>
-                <Grid item >
-                    <TextField onChange={handleChange("Description")} id="outlined-basic" label="Description" variant="outlined" />
+                <Grid   item xs={7}>
+                    <TextField onChange={handleChange("Description")} id="outlined-basic" label="Description" variant="outlined" fullWidth/>
                 </Grid>
-                <Grid item >
-                    <FormControl style={{marginTop:"7px"}} >
-                        <InputLabel id="demo-simple-select-label">Priority</InputLabel>
-                        <Select
-                            value={inputFields.Priority}
-                            onChange={handleChange("Priority")}
-                        >
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                            <MenuItem value={4}>4</MenuItem>
-                            <MenuItem value={5}>5</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item >
+                <Grid item xs={3} style={{paddingRight:"10px"}}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDatePicker
                         style={{marginTop:"7px"}}
@@ -105,8 +90,24 @@ export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
                     />
                 </MuiPickersUtilsProvider>
                 </Grid>
+                <Grid item   xs={2} >
+                    <FormControl style={{marginTop:"7px"}} >
+                        <InputLabel id="demo-simple-select-label">Priority</InputLabel>
+                        <Select
+                            value={inputFields.Priority}
+                            onChange={handleChange("Priority")}
+                        >
+                            <MenuItem value={1}>1</MenuItem>
+                            <MenuItem value={2}>2</MenuItem>
+                            <MenuItem value={3}>3</MenuItem>
+                            <MenuItem value={4}>4</MenuItem>
+                            <MenuItem value={5}>5</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+
             </Grid>
-            <div style={{textAlign:"center"}}>
+            <div style={{textAlign:"left", paddingBottom:"10px"}}>
             <Button onClick={submitInputs} variant="contained" color="primary" >
                 Add toDo
             </Button>
