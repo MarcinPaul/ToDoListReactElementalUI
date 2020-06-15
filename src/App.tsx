@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
-import CSS from 'csstype';
 import { ToDoList } from './TodoList';
 import Container from '@material-ui/core/Container';
 import { AddToDoForm } from './AddToDoForm'
+import {ITodoListEntry} from './Interfaces/Interfaces'
 
-type Priority = 1 | 2 | 3 | 4 | 5;
-
-export interface TodoListEntryI {
-  dateAdded: Date,
-  priority: Priority,
-  title: String,
-  description?: String,
-  dueTo: Date,
-}
-export interface TodoListWithSet {
-  todoList: TodoListEntryI[],
-  setToDoList: React.Dispatch<React.SetStateAction<TodoListEntryI[]>>
-}
 
 function App() {
   const [todoList, settodoList] = useState([{
@@ -29,12 +16,11 @@ function App() {
   }, {
     priority: 5,
     dateAdded: new Date(),
-    title: "Title2fdsssssssssssssssssssssss",
-    description: "OPIS1",
+    title: "Title2",
+    description: "OPIS2",
     dueTo: new Date(new Date().getTime() + 24 * 60 * 60 * 1000)
   }
-  ] as TodoListEntryI[])
-
+  ] as ITodoListEntry[])
 
   return (
     <div className="App">

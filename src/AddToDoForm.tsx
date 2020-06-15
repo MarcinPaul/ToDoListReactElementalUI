@@ -1,40 +1,23 @@
 
-import { TodoListWithSet, TodoListEntryI } from './App'
-import React, { useEffect, useState, ChangeEvent } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
+import { TodoListWithSet, ITodoListEntry } from './Interfaces/Interfaces'
+import React, { useState, ChangeEvent } from 'react'
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { Grid, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
-
-
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
     KeyboardDatePicker,
 } from '@material-ui/pickers';
-
-
-
-const useStyles = makeStyles((theme) => ({
-
-}));
-//const [elementsStyle, setElementStyle] = useState([] as Array<boolean>);
+import {Iinput} from './Interfaces/Interfaces'
 
 
 
 export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
 
-    interface Iinput {
-        Title: String,
-        Description: String,
-        Priority: 1 | 2 | 3 | 4 | 5,
-        DueTo: Date
-    }
     const [inputFields, setInputFields] = useState({
         Title: "",
         Description: "",
@@ -44,7 +27,6 @@ export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
 
     const handleChange = (input: string) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement> | React.ChangeEvent<{ value: unknown }>) => {
         setInputFields({ ...inputFields, [input]: e.target.value })
-
     }
 
     const handleDateChange = (date: Date | null) => {
@@ -52,7 +34,7 @@ export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
     }
 
     const submitInputs = () => {
-        let todo: TodoListEntryI = {
+        let todo: ITodoListEntry = {
             dateAdded: new Date(),
             priority: inputFields["Priority"],
             dueTo: inputFields["DueTo"],
@@ -61,16 +43,14 @@ export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
         }
         props.setToDoList([...props.todoList, todo])
     }
-    const classes = useStyles();
-    const values = { Title: "", Description: "", Priority: 1, DueTo: new Date() }
     return (
         <form noValidate autoComplete="off" >
             <Grid container style={{paddingTop:"10px"}}>
                 <Grid style={{paddingRight:"10px"}}  item  xs={4}>
-                    <TextField onChange={handleChange("Title")} id="outlined-basic" label="Title" variant="outlined" fullWidth />
+                    <TextField onChange={handleChange("Title")}  label="Title" variant="outlined" fullWidth />
                 </Grid>
                 <Grid   item xs={7}>
-                    <TextField onChange={handleChange("Description")} id="outlined-basic" label="Description" variant="outlined" fullWidth/>
+                    <TextField onChange={handleChange("Description")}  label="Description" variant="outlined" fullWidth/>
                 </Grid>
                 <Grid item xs={3} style={{paddingRight:"10px"}}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -111,11 +91,7 @@ export const AddToDoForm: React.FC<TodoListWithSet> = (props) => {
             <Button onClick={submitInputs} variant="contained" color="primary" >
                 Add toDo
             </Button>
-            </div>
-
-                
+            </div>             
         </form >
-
-
     )
 }
